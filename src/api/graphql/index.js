@@ -4,21 +4,21 @@ import { split, HttpLink } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
 
 const httpLink = new HttpLink({
-  uri: "https://steady-chow-18.hasura.app/v1/graphql",
+  uri: "https://fluent-stag-45.hasura.app/v1/graphql",
   headers: {
     "x-hasura-admin-secret":
-      "aLNcN2QesZsRMI7cJG857GYCVoSwLdxDWlpTlujXUzoUs84KVaBj9EXFrSt3ClaW",
+      "WqLRFUZNbuQE1lUb6o5WOQH1YlJr3Xz8FvuWmdJX9Or7qV8dzQIFMBMO0Ts10rV1",
   },
 });
 
 const wsLink = new WebSocketLink({
-  uri: "wss://steady-chow-18.hasura.app/v1/graphql",
+  uri: "wss://fluent-stag-45.hasura.app/v1/graphql",
   options: {
     reconnect: true,
     connectionParams: {
       headers: {
         "x-hasura-admin-secret":
-          "aLNcN2QesZsRMI7cJG857GYCVoSwLdxDWlpTlujXUzoUs84KVaBj9EXFrSt3ClaW",
+          "WqLRFUZNbuQE1lUb6o5WOQH1YlJr3Xz8FvuWmdJX9Or7qV8dzQIFMBMO0Ts10rV1",
       },
     },
   },
