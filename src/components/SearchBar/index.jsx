@@ -39,7 +39,7 @@ function SearchBar({ type }) {
           autoComplete="off"
           placeholder={title}
           onChange={(e) => {
-            dispatch(SEARCH_KEYWORDS(e.target.value));
+            dispatch(SEARCH_KEYWORDS(parseInt(e.target.value)));
           }}
         />
       </div>
