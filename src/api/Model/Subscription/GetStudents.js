@@ -2,7 +2,10 @@ import { gql } from "@apollo/client";
 
 export const GET_STUDENTS = gql`
   subscription GetStudents($prodi: String!) {
-    students(where: { study_programs_id: { _eq: $prodi } }) {
+    students(
+      order_by: { npm: asc }
+      where: { study_programs_id: { _eq: $prodi } }
+    ) {
       npm
       fullname
       study_program {

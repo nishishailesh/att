@@ -1,12 +1,13 @@
 import { gql } from "@apollo/client";
 
 export const GET_ATTENDANCES_STUDENT = gql`
-  subscription GetAttendanceStudents($schedules_id: Int!, $npm: String!) {
+  subscription GetAttendanceStudents($schedules_id: Int!, $npm: Int!) {
     attendances(
       where: {
         schedules_id: { _eq: $schedules_id }
         _and: { npm: { _eq: $npm } }
       }
+      order_by: { npm: asc }
     ) {
       student {
         npm
