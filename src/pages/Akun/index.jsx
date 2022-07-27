@@ -62,7 +62,7 @@ function Akun() {
   useEffect(() => {
     if (confirmPassword !== "") {
       if (confirmPassword !== newPassword) {
-        setNewPasswordError("Konfirmasi Password tidak sesuai");
+        setNewPasswordError("Confirm Password does not match");
       } else {
         setNewPasswordError("");
       }
@@ -98,9 +98,13 @@ function Akun() {
       <Sidebar />
       <Header />
       <div className="main bg-primary-white2 dark:bg-primary-black lg:px-7 pt-20 lg:text-xl text-xs h-screen">
-        <h1 className="p-3 lg:text-2xl lg:text-left text-lg text-center text-primary-grey dark:text-white">Change Password</h1>
+        <h1 className="p-3 lg:text-2xl lg:text-left text-lg text-center text-primary-grey dark:text-white">
+          Change Password
+        </h1>
         <div className="bg-primary-white dark:bg-primary-grey text-white p-5 h-max w-full">
-          <h1 className="p-3 lg:text-2xl text-lg text-center text-primary-grey dark:text-white">{account.fullname}</h1>
+          <h1 className="p-3 lg:text-2xl text-lg text-center text-primary-grey dark:text-white">
+            {account.fullname}
+          </h1>
           <form onSubmit={handleUpdate}>
             <div className="relative py-2 z-0 w-full group">
               <input
@@ -123,9 +127,29 @@ function Akun() {
                 Old Password
               </label>
 
-              <div className={togglePasswordIcon === true ? "text-2xl top-3 right-5 absolute" : "hidden"}>{showPassword === false ? <AiOutlineEye className="dark:text-white" onClick={toggleShowPassword} /> : <AiOutlineEyeInvisible className="dark:text-white" onClick={toggleShowPassword} />}</div>
+              <div
+                className={
+                  togglePasswordIcon === true
+                    ? "text-2xl top-3 right-5 absolute"
+                    : "hidden"
+                }
+              >
+                {showPassword === false ? (
+                  <AiOutlineEye
+                    className="dark:text-white"
+                    onClick={toggleShowPassword}
+                  />
+                ) : (
+                  <AiOutlineEyeInvisible
+                    className="dark:text-white"
+                    onClick={toggleShowPassword}
+                  />
+                )}
+              </div>
               <div className="h-6 w-full py-1">
-                <h1 className="lg:text-left text-xs text-left text-secondary-red">{oldPasswordError}</h1>
+                <h1 className="lg:text-left text-xs text-left text-secondary-red">
+                  {oldPasswordError}
+                </h1>
               </div>
             </div>
             <div className="relative py-2 z-0 w-full mb-6 group">
@@ -170,12 +194,17 @@ function Akun() {
                 Confirm New password
               </label>
               <div className="h-6 w-full py-1">
-                <h1 className="lg:text-left text-xs text-left text-secondary-red">{newPasswordError}</h1>
+                <h1 className="lg:text-left text-xs text-left text-secondary-red">
+                  {newPasswordError}
+                </h1>
               </div>
             </div>
 
             <div className="flex items-center justify-center p-6 space-x-2">
-              <button type="submit" className="text-white bg-gradient-to-r from-primary-blue via-blue-800 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2">
+              <button
+                type="submit"
+                className="text-white bg-gradient-to-r from-primary-blue via-blue-800 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"
+              >
                 {loading ? <LoadingAnimation /> : "Update"}
               </button>
             </div>

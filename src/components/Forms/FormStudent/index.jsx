@@ -28,7 +28,7 @@ function FormStudent() {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Data Mahasiswa Berhasil Dimasukan",
+          title: "Student Data Entered Successfully",
           showConfirmButton: false,
           timer: 1200,
         });
@@ -40,7 +40,7 @@ function FormStudent() {
         Swal.fire({
           position: "top-end",
           icon: "error",
-          title: "NPM TELAH DIGUNAKAN,PERIKSA KEMBALI",
+          title: "NPM ALREADY EXIST PLS CHECK!",
           showConfirmButton: false,
           timer: 1500,
         });

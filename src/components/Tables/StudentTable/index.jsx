@@ -83,7 +83,7 @@ function StudentTable({ schedule_data, type }) {
     } else {
       setData(
         [...data].map((obj) => {
-          if (obj.npm === e.target.value) {
+          if (obj.npm === parseInt(e.target.value)) {
             return {
               ...obj,
               is_checked: !obj.is_checked,
@@ -213,7 +213,7 @@ function StudentTable({ schedule_data, type }) {
                     ></path>
                   </svg>
                   <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                    Selesai
+                    Done!
                   </h3>
                   <button
                     type="button"
@@ -224,7 +224,7 @@ function StudentTable({ schedule_data, type }) {
                         : setFinishDelete(false)
                     }
                   >
-                    Selesai
+                    Done!
                   </button>
                 </div>
               </div>
@@ -265,7 +265,7 @@ function StudentTable({ schedule_data, type }) {
                     Status
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
-                    Aksi
+                    Action
                   </th>
                 </>
               )}
@@ -315,13 +315,11 @@ function StudentTable({ schedule_data, type }) {
                   ) : (
                     <tr>
                       <td colSpan={6}>
-                        <p className="text-center py-3">
-                          TIDAK ADA MAHASISWA AKTIF
-                        </p>
+                        <p className="text-center py-3">NO ACTIVE STUDENTS</p>
                       </td>
                     </tr>
                   )
-                ) : filter === "aktif" ? (
+                ) : filter === "Active" ? (
                   data.filter((d) => d.is_active === true).length !== 0 ? (
                     data
                       .filter((d) => d.is_active === true)
@@ -351,9 +349,7 @@ function StudentTable({ schedule_data, type }) {
                           <td className="px-6 py-4">{student.npm}</td>
                           <td className="px-6 py-4">{student.fullname}</td>
                           <td className="px-6 py-4">
-                            {student.is_active === true
-                              ? "Aktif"
-                              : "Tidak Aktif"}
+                            {student.is_active === true ? "Active" : "Inactive"}
                           </td>
                           <td className="flex flex-row justify-center gap-x-1 pt-2">
                             <UpdateStudentModal data={student} />
@@ -364,13 +360,11 @@ function StudentTable({ schedule_data, type }) {
                   ) : (
                     <tr>
                       <td colSpan={6}>
-                        <p className="text-center py-3">
-                          TIDAK ADA MAHASISWA AKTIF
-                        </p>
+                        <p className="text-center py-3">NO ACTIVE STUDENTS</p>
                       </td>
                     </tr>
                   )
-                ) : filter === "tidak_aktif" ? (
+                ) : filter === "Inactive" ? (
                   data.filter((d) => d.is_active === false).length !== 0 ? (
                     data
                       .filter((d) => d.is_active === false)
@@ -400,9 +394,7 @@ function StudentTable({ schedule_data, type }) {
                           <td className="px-6 py-4">{student.npm}</td>
                           <td className="px-6 py-4">{student.fullname}</td>
                           <td className="px-6 py-4">
-                            {student.is_active === true
-                              ? "Aktif"
-                              : "Tidak Aktif"}
+                            {student.is_active === true ? "Active" : "Inactive"}
                           </td>
                           <td className="flex flex-row justify-center gap-x-1 pt-2">
                             <UpdateStudentModal data={student} />
@@ -413,9 +405,7 @@ function StudentTable({ schedule_data, type }) {
                   ) : (
                     <tr>
                       <td colSpan={6}>
-                        <p className="text-center py-3">
-                          TIDAK ADA MAHASISWA TIDAK AKTIF
-                        </p>
+                        <p className="text-center py-3">No Students Inactive</p>
                       </td>
                     </tr>
                   )
@@ -446,7 +436,7 @@ function StudentTable({ schedule_data, type }) {
                       <td className="px-6 py-4">{student.npm}</td>
                       <td className="px-6 py-4">{student.fullname}</td>
                       <td className="px-6 py-4">
-                        {student.is_active === true ? "Aktif" : "Tidak Aktif"}
+                        {student.is_active === true ? "Active" : "Inactive"}
                       </td>
                       <td className="flex flex-row justify-center gap-x-1 pt-2">
                         <UpdateStudentModal data={student} />
@@ -458,7 +448,7 @@ function StudentTable({ schedule_data, type }) {
               ) : (
                 <tr>
                   <td colSpan={6}>
-                    <p className="text-center py-3">Data Mahasiswa Kosong</p>
+                    <p className="text-center py-3">No Students</p>
                   </td>
                 </tr>
               )
@@ -495,9 +485,7 @@ function StudentTable({ schedule_data, type }) {
                       {type !== "insertStudentToAttendance" && (
                         <>
                           <td className="px-6 py-4">
-                            {student.is_active === true
-                              ? "Aktif"
-                              : "Tidak Aktif"}
+                            {student.is_active === true ? "Active" : "Inactive"}
                           </td>
                           <td className="flex flex-row justify-center gap-x-1 pt-2">
                             <UpdateStudentModal data={student} />
@@ -538,9 +526,7 @@ function StudentTable({ schedule_data, type }) {
                       {type !== "insertStudentToAttendance" && (
                         <>
                           <td className="px-6 py-4">
-                            {student.is_active === true
-                              ? "Aktif"
-                              : "Tidak Aktif"}
+                            {student.is_active === true ? "Active" : "Inactive"}
                           </td>
                           <td className="flex flex-row justify-center gap-x-1 pt-2">
                             <UpdateStudentModal data={student} />
@@ -554,7 +540,7 @@ function StudentTable({ schedule_data, type }) {
             ) : (
               <tr>
                 <td colSpan={6}>
-                  <p className="text-center py-3">NPM TIDAK DITEMUKAN</p>
+                  <p className="text-center py-3">NPM not found!</p>
                 </td>
               </tr>
             )}
@@ -569,7 +555,7 @@ function StudentTable({ schedule_data, type }) {
             className="text-white bg-gradient-to-r from-primary-blue via-blue-800 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             data-modal-toggle="large-modal"
           >
-            {loadingInsert ? <LoadingAnimation /> : "Tambah"}
+            {loadingInsert ? <LoadingAnimation /> : "Add"}
           </button>
         </div>
       )}
@@ -616,10 +602,10 @@ function StudentTable({ schedule_data, type }) {
                   ></path>
                 </svg>
                 <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                  Anda yakin ingin menghapus sejumlah
+                  Are you sure you want to delete!
                   <br />
                   <b>
-                    {data.filter((d) => d.is_checked === true).length} Mahasiswa
+                    {data.filter((d) => d.is_checked === true).length} Student
                   </b>
                 </h3>
                 <button
@@ -627,14 +613,14 @@ function StudentTable({ schedule_data, type }) {
                   className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                   onClick={handleDeleteStudent}
                 >
-                  {loadingDelete ? <LoadingAnimation /> : "Hapus"}
+                  {loadingDelete ? <LoadingAnimation /> : "Delete"}
                 </button>
                 <button
                   type="button"
                   className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                   onClick={() => setShowModal(false)}
                 >
-                  Batalkan
+                  Cancel
                 </button>
               </div>
             </div>
@@ -683,11 +669,11 @@ function StudentTable({ schedule_data, type }) {
                   ></path>
                 </svg>
                 <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                  Anda ingin menambahkan
+                  Do you want to add!
                   <br />
                   <b>
                     {listStudents.filter((c) => c.is_checked === true).length}{" "}
-                    Mahasiswa ke kelas {schedule_data.class_name}
+                    Class {schedule_data.class_name}
                   </b>
                 </h3>
                 <button
@@ -695,14 +681,14 @@ function StudentTable({ schedule_data, type }) {
                   className="text-white bg-primary-blue hover:bg-secondary-blue focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                   onClick={handleInsertStudentToAttendance}
                 >
-                  {loadingDelete ? <LoadingAnimation /> : "Tambah"}
+                  {loadingDelete ? <LoadingAnimation /> : "Add"}
                 </button>
                 <button
                   type="button"
                   className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                   onClick={() => setShowModalInsert(false)}
                 >
-                  Batalkan
+                  Cancel
                 </button>
               </div>
             </div>

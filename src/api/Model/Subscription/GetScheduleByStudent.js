@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_SCHEDULE_BY_STUDENT = gql`
-  subscription GetScheduleStudent($npm: String!) {
+  subscription GetScheduleStudent($npm: Int!) {
     schedules(where: { attendances: { npm: { _eq: $npm } } }) {
       id
       time

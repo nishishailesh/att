@@ -24,7 +24,7 @@ function ModalImport() {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Data Mahasiswa Berhasil Dimasukan",
+          title: "Data entered successfully !",
           showConfirmButton: false,
           timer: 1200,
         });

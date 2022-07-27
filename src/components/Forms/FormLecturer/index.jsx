@@ -41,7 +41,7 @@ function FormLecturer() {
         Swal.fire({
           position: "top-end",
           icon: "error",
-          title: "NIDN TELAH DIGUNAKAN,PERIKSA KEMBALI",
+          title: "NIDN ALREADY EXIST PLS CHECK!",
           showConfirmButton: false,
           timer: 1500,
         });
