@@ -7,9 +7,13 @@ import { DELETE_STUDENT_FROM_CLASS } from "../../../api/Model/Mutation/Delete/De
 import LoadingAnimation from "../../Loading/LoadingAnimation";
 
 function ClassesTable({ schedule_data }) {
-  const { data, loading } = useSubscription(GET_ATTENDANCES, { variables: { schedules_id: schedule_data.id } });
+  const { data, loading } = useSubscription(GET_ATTENDANCES, {
+    variables: { schedules_id: schedule_data.id },
+  });
   const [attendances, setAttendances] = useState([]);
-  const [deleteStudent, { loading: deleteLoading }] = useMutation(DELETE_STUDENT_FROM_CLASS);
+  const [deleteStudent, { loading: deleteLoading }] = useMutation(
+    DELETE_STUDENT_FROM_CLASS
+  );
 
   useEffect(() => {
     setAttendances([]);
@@ -61,11 +65,20 @@ function ClassesTable({ schedule_data }) {
             </tr>
           ) : attendances.length !== 0 ? (
             attendances.map((attendance, index) => (
-              <tr key={attendance.npm} className="dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-primary-white2 dark:hover:bg-gray-700">
+              <tr
+                key={attendance.npm}
+                className="dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-primary-white2 dark:hover:bg-gray-700"
+              >
                 <td className="px-6 py-4">{attendance.npm}</td>
                 <td className="px-6 py-4">{attendance.fullname}</td>
                 <td className="px-6 py-4">
-                  <button onClick={() => handleDelete(attendance.npm, index)}>{deleteLoading && deleteIndex === index ? <LoadingAnimation /> : <AiOutlineClose size={20} color="red" />}</button>
+                  <button onClick={() => handleDelete(attendance.npm, index)}>
+                    {deleteLoading && deleteIndex === index ? (
+                      <LoadingAnimation />
+                    ) : (
+                      <AiOutlineClose size={20} color="red" />
+                    )}
+                  </button>
                 </td>
               </tr>
             ))

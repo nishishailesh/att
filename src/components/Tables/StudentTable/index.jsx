@@ -253,6 +253,7 @@ function StudentTable({ schedule_data, type }) {
                   )}
                 </div>
               </th>
+
               <th scope="col" className="px-6 py-3">
                 NPM
               </th>
