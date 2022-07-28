@@ -95,7 +95,7 @@ function ModalUpdateLecturer({ data }) {
           <div className="relative p-4 mx-auto w-full max-w-xl h-full md:h-auto">
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
               <div className="flex justify-between items-center p-5 rounded-t border-b dark:border-gray-600">
-                <h3 className="text-xl font-medium text-gray-900 dark:text-white">Update Dosen {nidn}</h3>
+                <h3 className="text-xl font-medium text-gray-900 dark:text-white">Update lecturer {nidn}</h3>
                 <button
                   onClick={() => {
                     setShowModal(false);
