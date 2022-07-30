@@ -309,1611 +309,771 @@ function AttendanceTable({ schedule_data, role }) {
   };
 
   return (
-    <div className="relative h-96 overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs sticky top-0 text-gray-700 uppercase bg-primary-white2 dark:bg-primary-black dark:text-gray-400">
-          <tr>
-            <th scope="col" className="px-6 w-1/4 py-3 text-center">
-              Status
-            </th>
-            <th scope="col" className="px-6 py-3">
-              NPM
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Name
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {loading ? (
+    <>
+      <p className="p-1">Total Student : {attendances?.length !== 0 ? attendances?.length : "0"}</p>
+      <div className="relative h-96 overflow-x-auto shadow-md sm:rounded-lg">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs sticky top-0 text-gray-700 uppercase bg-primary-white2 dark:bg-primary-black dark:text-gray-400">
             <tr>
-              <td colSpan={3} rowSpan={6}>
-                <LoadingAnimationXL />
-              </td>
+              <th scope="col" className="px-6 w-1/4 py-3 text-center">
+                Status
+              </th>
+              <th scope="col" className="px-6 py-3">
+                NPM
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Name
+              </th>
             </tr>
-          ) : attendances.length !== 0 ? (
-            attendances.map((attendance, index) => (
-              <tr
-                key={attendance.npm}
-                className="dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-primary-white2 dark:hover:bg-gray-700"
-              >
-                <td className="px-6 py-4 w-full flex justify-center text-white">
-                  {meeting === "1" ? (
-                    <div>
-                      {attendance.p1 === 0 ? (
-                        <button
-                          className="bg-secondary-red lg:p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "2" ? (
-                    <div>
-                      {attendance.p2 === 0 ? (
-                        <button
-                          className="bg-secondary-red lg:p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "3" ? (
-                    <div>
-                      {attendance.p3 === 0 ? (
-                        <button
-                          className="bg-secondary-red lg:p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "4" ? (
-                    <div>
-                      {attendance.p4 === 0 ? (
-                        <button
-                          className="bg-secondary-red lg:p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "5" ? (
-                    <div>
-                      {attendance.p5 === 0 ? (
-                        <button
-                          className="bg-secondary-red lg:p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "6" ? (
-                    <div>
-                      {attendance.p6 === 0 ? (
-                        <button
-                          className="bg-secondary-red lg:p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "7" ? (
-                    <div>
-                      {attendance.p7 === 0 ? (
-                        <button
-                          className="bg-secondary-red lg:p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "8" ? (
-                    <div>
-                      {attendance.p8 === 0 ? (
-                        <button
-                          className="bg-secondary-red lg:p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "9" ? (
-                    <div>
-                      {attendance.p9 === 0 ? (
-                        <button
-                          className="bg-secondary-red lg:p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "10" ? (
-                    <div>
-                      {attendance.p10 === 0 ? (
-                        <button
-                          className="bg-secondary-red lg:p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "11" ? (
-                    <div>
-                      {attendance.p11 === 0 ? (
-                        <button
-                          className="bg-secondary-red lg:p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "12" ? (
-                    <div>
-                      {attendance.p12 === 0 ? (
-                        <button
-                          className="bg-secondary-red lg:p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "13" ? (
-                    <div>
-                      {attendance.p13 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "14" ? (
-                    <div>
-                      {attendance.p14 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "15" ? (
-                    <div>
-                      {attendance.p15 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "16" ? (
-                    <div>
-                      {attendance.p16 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "17" ? (
-                    <div>
-                      {attendance.p17 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "18" ? (
-                    <div>
-                      {attendance.p18 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "19" ? (
-                    <div>
-                      {attendance.p19 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "20" ? (
-                    <div>
-                      {attendance.p20 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "21" ? (
-                    <div>
-                      {attendance.p21 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "22" ? (
-                    <div>
-                      {attendance.p22 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "23" ? (
-                    <div>
-                      {attendance.p23 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "24" ? (
-                    <div>
-                      {attendance.p24 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "25" ? (
-                    <div>
-                      {attendance.p25 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "26" ? (
-                    <div>
-                      {attendance.p26 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "27" ? (
-                    <div>
-                      {attendance.p27 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "28" ? (
-                    <div>
-                      {attendance.p28 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "29" ? (
-                    <div>
-                      {attendance.p29 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "30" ? (
-                    <div>
-                      {attendance.p30 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "31" ? (
-                    <div>
-                      {attendance.p31 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "32" ? (
-                    <div>
-                      {attendance.p32 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "33" ? (
-                    <div>
-                      {attendance.p33 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "34" ? (
-                    <div>
-                      {attendance.p34 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "35" ? (
-                    <div>
-                      {attendance.p35 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "36" ? (
-                    <div>
-                      {attendance.p36 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "37" ? (
-                    <div>
-                      {attendance.p37 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "38" ? (
-                    <div>
-                      {attendance.p38 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "39" ? (
-                    <div>
-                      {attendance.p39 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "40" ? (
-                    <div>
-                      {attendance.p40 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "41" ? (
-                    <div>
-                      {attendance.p41 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "42" ? (
-                    <div>
-                      {attendance.p42 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "43" ? (
-                    <div>
-                      {attendance.p43 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "44" ? (
-                    <div>
-                      {attendance.p44 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "45" ? (
-                    <div>
-                      {attendance.p45 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "46" ? (
-                    <div>
-                      {attendance.p46 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "47" ? (
-                    <div>
-                      {attendance.p47 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "48" ? (
-                    <div>
-                      {attendance.p48 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "49" ? (
-                    <div>
-                      {attendance.p49 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "50" ? (
-                    <div>
-                      {attendance.p50 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "51" ? (
-                    <div>
-                      {attendance.p51 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "52" ? (
-                    <div>
-                      {attendance.p52 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "53" ? (
-                    <div>
-                      {attendance.p53 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "54" ? (
-                    <div>
-                      {attendance.p54 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "55" ? (
-                    <div>
-                      {attendance.p55 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "56" ? (
-                    <div>
-                      {attendance.p56 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "57" ? (
-                    <div>
-                      {attendance.p57 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "58" ? (
-                    <div>
-                      {attendance.p58 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : meeting === "59" ? (
-                    <div>
-                      {attendance.p59 === 0 ? (
-                        <button
-                          className="bg-secondary-red p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  ) : (
-                    <div>
-                      {attendance.p60 === 0 ? (
-                        <button
-                          className="bg-secondary-red lg:p-2 text-xs rounded-md"
-                          onClick={() => handlePresent(attendance.npm, index)}
-                        >
-                          {loadingPresent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Absent"
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-secondary-blue p-2 rounded-md"
-                          onClick={() => handleAbsent(attendance.npm, index)}
-                        >
-                          {loadingAbsent && attendanceIndex === index ? (
-                            <LoadingAnimation />
-                          ) : (
-                            "Present"
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  )}
+          </thead>
+          <tbody>
+            {loading ? (
+              <tr>
+                <td colSpan={3} rowSpan={6}>
+                  <LoadingAnimationXL />
                 </td>
-                <td className="px-6 py-4">{attendance.npm}</td>
-                <td className="px-6 py-4">{attendance.fullname}</td>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={4}>
-                <p className="text-center py-3">No Student data</p>
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+            ) : attendances.length !== 0 ? (
+              attendances.map((attendance, index) => (
+                <tr key={attendance.npm} className="dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-primary-white2 dark:hover:bg-gray-700">
+                  <td className="px-6 py-4 w-full flex justify-center text-white">
+                    {meeting === "1" ? (
+                      <div>
+                        {attendance.p1 === 0 ? (
+                          <button className="bg-secondary-red lg:p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "2" ? (
+                      <div>
+                        {attendance.p2 === 0 ? (
+                          <button className="bg-secondary-red lg:p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "3" ? (
+                      <div>
+                        {attendance.p3 === 0 ? (
+                          <button className="bg-secondary-red lg:p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "4" ? (
+                      <div>
+                        {attendance.p4 === 0 ? (
+                          <button className="bg-secondary-red lg:p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "5" ? (
+                      <div>
+                        {attendance.p5 === 0 ? (
+                          <button className="bg-secondary-red lg:p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "6" ? (
+                      <div>
+                        {attendance.p6 === 0 ? (
+                          <button className="bg-secondary-red lg:p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "7" ? (
+                      <div>
+                        {attendance.p7 === 0 ? (
+                          <button className="bg-secondary-red lg:p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "8" ? (
+                      <div>
+                        {attendance.p8 === 0 ? (
+                          <button className="bg-secondary-red lg:p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "9" ? (
+                      <div>
+                        {attendance.p9 === 0 ? (
+                          <button className="bg-secondary-red lg:p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "10" ? (
+                      <div>
+                        {attendance.p10 === 0 ? (
+                          <button className="bg-secondary-red lg:p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "11" ? (
+                      <div>
+                        {attendance.p11 === 0 ? (
+                          <button className="bg-secondary-red lg:p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "12" ? (
+                      <div>
+                        {attendance.p12 === 0 ? (
+                          <button className="bg-secondary-red lg:p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "13" ? (
+                      <div>
+                        {attendance.p13 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "14" ? (
+                      <div>
+                        {attendance.p14 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "15" ? (
+                      <div>
+                        {attendance.p15 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "16" ? (
+                      <div>
+                        {attendance.p16 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "17" ? (
+                      <div>
+                        {attendance.p17 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "18" ? (
+                      <div>
+                        {attendance.p18 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "19" ? (
+                      <div>
+                        {attendance.p19 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "20" ? (
+                      <div>
+                        {attendance.p20 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "21" ? (
+                      <div>
+                        {attendance.p21 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "22" ? (
+                      <div>
+                        {attendance.p22 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "23" ? (
+                      <div>
+                        {attendance.p23 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "24" ? (
+                      <div>
+                        {attendance.p24 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "25" ? (
+                      <div>
+                        {attendance.p25 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "26" ? (
+                      <div>
+                        {attendance.p26 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "27" ? (
+                      <div>
+                        {attendance.p27 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "28" ? (
+                      <div>
+                        {attendance.p28 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "29" ? (
+                      <div>
+                        {attendance.p29 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "30" ? (
+                      <div>
+                        {attendance.p30 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "31" ? (
+                      <div>
+                        {attendance.p31 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "32" ? (
+                      <div>
+                        {attendance.p32 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "33" ? (
+                      <div>
+                        {attendance.p33 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "34" ? (
+                      <div>
+                        {attendance.p34 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "35" ? (
+                      <div>
+                        {attendance.p35 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "36" ? (
+                      <div>
+                        {attendance.p36 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "37" ? (
+                      <div>
+                        {attendance.p37 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "38" ? (
+                      <div>
+                        {attendance.p38 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "39" ? (
+                      <div>
+                        {attendance.p39 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "40" ? (
+                      <div>
+                        {attendance.p40 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "41" ? (
+                      <div>
+                        {attendance.p41 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "42" ? (
+                      <div>
+                        {attendance.p42 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "43" ? (
+                      <div>
+                        {attendance.p43 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "44" ? (
+                      <div>
+                        {attendance.p44 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "45" ? (
+                      <div>
+                        {attendance.p45 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "46" ? (
+                      <div>
+                        {attendance.p46 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "47" ? (
+                      <div>
+                        {attendance.p47 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "48" ? (
+                      <div>
+                        {attendance.p48 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "49" ? (
+                      <div>
+                        {attendance.p49 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "50" ? (
+                      <div>
+                        {attendance.p50 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "51" ? (
+                      <div>
+                        {attendance.p51 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "52" ? (
+                      <div>
+                        {attendance.p52 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "53" ? (
+                      <div>
+                        {attendance.p53 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "54" ? (
+                      <div>
+                        {attendance.p54 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "55" ? (
+                      <div>
+                        {attendance.p55 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "56" ? (
+                      <div>
+                        {attendance.p56 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "57" ? (
+                      <div>
+                        {attendance.p57 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "58" ? (
+                      <div>
+                        {attendance.p58 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : meeting === "59" ? (
+                      <div>
+                        {attendance.p59 === 0 ? (
+                          <button className="bg-secondary-red p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    ) : (
+                      <div>
+                        {attendance.p60 === 0 ? (
+                          <button className="bg-secondary-red lg:p-2 text-xs rounded-md" onClick={() => handlePresent(attendance.npm, index)}>
+                            {loadingPresent && attendanceIndex === index ? <LoadingAnimation /> : "Absent"}
+                          </button>
+                        ) : (
+                          <button className="bg-secondary-blue p-2 rounded-md" onClick={() => handleAbsent(attendance.npm, index)}>
+                            {loadingAbsent && attendanceIndex === index ? <LoadingAnimation /> : "Present"}
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </td>
+                  <td className="px-6 py-4">{attendance.npm}</td>
+                  <td className="px-6 py-4">{attendance.fullname}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={4}>
+                  <p className="text-center py-3">No Student data</p>
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
 
