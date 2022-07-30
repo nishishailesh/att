@@ -13,7 +13,6 @@ import ModalDelete from "../../Modal/ModalDelete";
 function LecturerTable() {
   const search = useSelector((state) => state.search.value);
   const { data: dataLecturers, loading: fetchLecturers } = useSubscription(GET_LECTURERS);
-
   const [data, setData] = useState([]);
   useEffect(() => {
     setData([]);
@@ -127,10 +126,10 @@ function LecturerTable() {
                 Email
               </th>
               <th scope="col" className="px-6 py-3">
-              CONTACT NO
+                CONTACT NO
               </th>
               <th scope="col" className="px-6 py-3">
-              ADDRESS
+                ADDRESS
               </th>
               <th scope="col" className="px-6 py-3 text-center">
                 Action
@@ -223,7 +222,7 @@ function LecturerTable() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                Are you sure you want to delete
+                  Are you sure you want to delete
                   <br />
                   <b>{data.filter((d) => d.is_checked === true).length} Lecturer</b>
                 </h3>
