@@ -47,9 +47,6 @@ function StudentTable({ schedule_data, type }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(listStudents);
-  console.log(alreadyData);
-
   useEffect(() => {
     dispatch(SEARCH_KEYWORDS(""));
     setData([]);
