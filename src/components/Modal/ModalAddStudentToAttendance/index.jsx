@@ -10,7 +10,6 @@ function ModalAddStudentToClass({ data }) {
   const INITIAL_VALUE = {
     id: "",
     class_name: "",
-    
   };
 
   const [assignValue, setAssignValue] = useState(INITIAL_VALUE);
@@ -18,7 +17,7 @@ function ModalAddStudentToClass({ data }) {
     <>
       <button
         onClick={() => {
-          setAssignValue({ ...assignValue, id: data.id, class_name: data.class.class_name});
+          setAssignValue({ ...assignValue, id: data.id, class_name: data.class.class_name });
           setShowModal(true);
         }}
         className="bg-primary-blue text-white hover:bg-secondary-blue p-2 rounded-md"

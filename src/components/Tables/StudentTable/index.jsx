@@ -15,6 +15,7 @@ import { FILTER_CATEGORY } from "../../../redux/filterSlice";
 import { SEARCH_KEYWORDS } from "../../../redux/searchSlice";
 import { DELETE_ALL_STUDENT } from "../../../api/Model/Mutation/Delete/DeleteAllStudent";
 import { DELETE_ALL_USER } from "../../../api/Model/Mutation/Delete/DeleteAllUsers";
+import { GET_ATTENDANCES } from "../../../api/Model/Subscription/GetAttendances";
 
 function StudentTable({ schedule_data, type }) {
   const id_prodi = useSelector((state) => state.prodi.id);
@@ -22,6 +23,19 @@ function StudentTable({ schedule_data, type }) {
   const search = useSelector((state) => state.search.value);
 
   const dispatch = useDispatch();
+
+  const { data: dataInClass } = useSubscription(GET_ATTENDANCES, {
+    variables: { schedules_id: schedule_data?.id },
+  });
+
+  const [alreadyData, setAlreadyData] = useState([]);
+
+  useEffect(() => {
+    setAlreadyData([]);
+    dataInClass?.attendances.forEach((attendance) => {
+      setAlreadyData((alreadyData) => [...alreadyData, attendance.student.npm]);
+    });
+  }, [dataInClass]);
 
   const { data: dataStudents, loading: fetchStudents } = useSubscription(GET_STUDENTS, { variables: { prodi: id_prodi } });
 
@@ -38,32 +52,36 @@ function StudentTable({ schedule_data, type }) {
     setData([]);
     setListStudents([]);
     !fetchStudents &&
-      dataStudents?.students.forEach((student) => {
-        if (type === "insertStudentToAttendance") {
-          setListStudents((listStudents) => [
-            ...listStudents,
-            {
-              npm: student.npm,
-              fullname: student.fullname,
-              class_id: schedule_data.id,
-              is_active: student.is_active,
-              is_checked: false,
-            },
-          ]);
-        } else {
-          setData((data) => [
-            ...data,
-            {
-              npm: student.npm,
-              fullname: student.fullname,
-              is_active: student.is_active,
-              is_checked: false,
-            },
-          ]);
-        }
-      });
+      dataStudents?.students
+        .filter((d) => d.is_active !== false)
+        .forEach((student) => {
+          if (type === "insertStudentToAttendance") {
+            if (!alreadyData.includes(student.npm)) {
+              setListStudents((listStudents) => [
+                ...listStudents,
+                {
+                  npm: student.npm,
+                  fullname: student.fullname,
+                  class_id: schedule_data.id,
+                  is_active: student.is_active,
+                  is_checked: false,
+                },
+              ]);
+            }
+          } else {
+            setData((data) => [
+              ...data,
+              {
+                npm: student.npm,
+                fullname: student.fullname,
+                is_active: student.is_active,
+                is_checked: false,
+              },
+            ]);
+          }
+        });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataStudents?.students]);
+  }, [dataStudents?.students, alreadyData]);
 
   const handleChange = (e) => {
     if (type === "insertStudentToAttendance") {
@@ -258,12 +276,7 @@ function StudentTable({ schedule_data, type }) {
             </div>
           </div>
         ))}
-      {type === "insertStudentToAttendance" && (
-        <>
-          <p className="p-1">Student Available : {listStudents.length}</p>
-          {listStudents.filter((d) => d.is_checked === true).length === 0 ? <p className="h-7"> </p> : <p className="p-1">Selected : {listStudents.filter((d) => d.is_checked === true).length}</p>}
-        </>
-      )}
+      {type === "insertStudentToAttendance" && <>{listStudents.filter((d) => d.is_checked === true).length === 0 ? <p className="h-7"> </p> : <p className="p-1">Selected : {listStudents.filter((d) => d.is_checked === true).length}</p>}</>}
       <div className="relative h-80 overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs sticky top-0 text-gray-700 uppercase bg-primary-white2 dark:bg-primary-black dark:text-gray-400">
@@ -324,29 +337,27 @@ function StudentTable({ schedule_data, type }) {
               data.length !== 0 || listStudents.length !== 0 ? (
                 type === "insertStudentToAttendance" ? (
                   listStudents.filter((d) => d.is_active !== false).length !== 0 ? (
-                    listStudents
-                      .filter((d) => d.is_active !== false)
-                      .map((student) => (
-                        <tr key={student.npm} className="dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-primary-white2 dark:hover:bg-gray-700">
-                          <td className="w-4 p-4">
-                            <div className="flex items-center">
-                              <input
-                                checked={student.is_checked}
-                                value={student.npm}
-                                onChange={handleChange}
-                                id="checkbox-table-search-1"
-                                type="checkbox"
-                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                              />
-                              <label htmlFor="checkbox-table-search-1" className="sr-only">
-                                checkbox
-                              </label>
-                            </div>
-                          </td>
-                          <td className="px-6 py-4">{student.npm}</td>
-                          <td className="px-6 py-4">{student.fullname}</td>
-                        </tr>
-                      ))
+                    listStudents.map((student) => (
+                      <tr key={student.npm} className="dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-primary-white2 dark:hover:bg-gray-700">
+                        <td className="w-4 p-4">
+                          <div className="flex items-center">
+                            <input
+                              checked={student.is_checked}
+                              value={student.npm}
+                              onChange={handleChange}
+                              id="checkbox-table-search-1"
+                              type="checkbox"
+                              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            />
+                            <label htmlFor="checkbox-table-search-1" className="sr-only">
+                              checkbox
+                            </label>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">{student.npm}</td>
+                        <td className="px-6 py-4">{student.fullname}</td>
+                      </tr>
+                    ))
                   ) : (
                     <tr>
                       <td colSpan={6}>
