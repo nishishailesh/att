@@ -33,7 +33,7 @@ function ModalDetailClass({ data }) {
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
               <div className="flex justify-between items-center p-5 rounded-t border-b dark:border-gray-600">
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                List of Students in Courses {assignValue.course_name} - {assignValue.class_name}
+                  List of Students in Courses {assignValue.course_name} - {assignValue.class_name}
                 </h3>
                 <button
                   onClick={() => {
