@@ -13,6 +13,8 @@ import UpdateStudentModal from "../../Modal/ModalUpdate/ModalUpdateStudent";
 import { INSERT_STUDENTS_TO_ATTENDANCE } from "../../../api/Model/Mutation/Insert/InsertStudentToAttendance";
 import { FILTER_CATEGORY } from "../../../redux/filterSlice";
 import { SEARCH_KEYWORDS } from "../../../redux/searchSlice";
+import { DELETE_ALL_STUDENT } from "../../../api/Model/Mutation/Delete/DeleteAllStudent";
+import { DELETE_ALL_USER } from "../../../api/Model/Mutation/Delete/DeleteAllUsers";
 
 function StudentTable({ schedule_data, type }) {
   const id_prodi = useSelector((state) => state.prodi.id);
@@ -103,6 +105,15 @@ function StudentTable({ schedule_data, type }) {
       setFinishDelete(true);
     },
   });
+  const [deleteStudentAll, { loading: loadingDeleteAll }] = useMutation(DELETE_ALL_STUDENT, {
+    onCompleted: () => {
+      setShowModal(false);
+      setData([]);
+      setFinishDelete(true);
+
+      setSelectAllStatus(!selectAllStatus);
+    },
+  });
 
   const [insertStudentToAttendance, { loading: loadingInsert }] = useMutation(INSERT_STUDENTS_TO_ATTENDANCE, {
     onCompleted: () => {
@@ -112,23 +123,38 @@ function StudentTable({ schedule_data, type }) {
   });
 
   const [deleteUser] = useMutation(DELETE_USER);
+  const [deleteAllUser] = useMutation(DELETE_ALL_USER);
   const [finishDelete, setFinishDelete] = useState(false);
   const [finishInsert, setFinishInsert] = useState(false);
   const handleDeleteStudent = () => {
-    data.forEach((student) => {
-      if (student.is_checked) {
-        deleteStudent({
-          variables: {
-            npm: student.npm,
-          },
-        });
-        deleteUser({
-          variables: {
-            username: student.npm,
-          },
-        });
-      }
-    });
+    if (selectAllStatus) {
+      deleteStudentAll({
+        variables: {
+          prodi: id_prodi,
+        },
+      });
+      deleteAllUser({
+        variables: {
+          prodi: id_prodi,
+          roles_id: 4,
+        },
+      });
+    } else {
+      data.forEach((student) => {
+        if (student.is_checked) {
+          deleteStudent({
+            variables: {
+              npm: student.npm,
+            },
+          });
+          deleteUser({
+            variables: {
+              username: student.npm.toString(),
+            },
+          });
+        }
+      });
+    }
   };
 
   const [selectedStudents, setSelectedStudents] = useState([]);
@@ -155,24 +181,46 @@ function StudentTable({ schedule_data, type }) {
   };
 
   const handleSelectAll = () => {
-    if (selectAllStatus) {
-      setListStudents(
-        [...listStudents].map((obj) => {
-          return {
-            ...obj,
-            is_checked: false,
-          };
-        })
-      );
+    if (type === "insertStudentToAttendance") {
+      if (selectAllStatus) {
+        setListStudents(
+          [...listStudents].map((obj) => {
+            return {
+              ...obj,
+              is_checked: false,
+            };
+          })
+        );
+      } else {
+        setListStudents(
+          [...listStudents].map((obj) => {
+            return {
+              ...obj,
+              is_checked: true,
+            };
+          })
+        );
+      }
     } else {
-      setListStudents(
-        [...listStudents].map((obj) => {
-          return {
-            ...obj,
-            is_checked: true,
-          };
-        })
-      );
+      if (selectAllStatus) {
+        setData(
+          [...data].map((obj) => {
+            return {
+              ...obj,
+              is_checked: false,
+            };
+          })
+        );
+      } else {
+        setData(
+          [...data].map((obj) => {
+            return {
+              ...obj,
+              is_checked: true,
+            };
+          })
+        );
+      }
     }
     setSelectAllStatus(!selectAllStatus);
   };
@@ -222,6 +270,16 @@ function StudentTable({ schedule_data, type }) {
             <tr>
               <th scope="col" className="p-4">
                 <div className="flex items-center">
+                  <input
+                    checked={selectAllStatus}
+                    onChange={handleSelectAll}
+                    id="checkbox-table-search-1"
+                    type="checkbox"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <label htmlFor="checkbox-table-search-1" className="sr-only">
+                    checkbox
+                  </label>
                   {type !== "insertStudentToAttendance" && data.filter((d) => d.is_checked === true).length !== 0 ? (
                     <button
                       onClick={() => {
@@ -232,18 +290,7 @@ function StudentTable({ schedule_data, type }) {
                       <AiOutlineDelete size={20} />
                     </button>
                   ) : (
-                    <div className="flex items-center">
-                      <input
-                        checked={selectAllStatus}
-                        onChange={handleSelectAll}
-                        id="checkbox-table-search-1"
-                        type="checkbox"
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                      <label htmlFor="checkbox-table-search-1" className="sr-only">
-                        checkbox
-                      </label>
-                    </div>
+                    []
                   )}
                 </div>
               </th>
@@ -316,7 +363,7 @@ function StudentTable({ schedule_data, type }) {
                           <td className="w-4 p-4">
                             <div className="flex items-center">
                               <input
-                                defaultChecked={student.is_checked}
+                                checked={student.is_checked}
                                 value={student.npm}
                                 onChange={handleChange}
                                 id="checkbox-table-search-1"
@@ -353,7 +400,7 @@ function StudentTable({ schedule_data, type }) {
                           <td className="w-4 p-4">
                             <div className="flex items-center">
                               <input
-                                defaultChecked={student.is_checked}
+                                checked={student.is_checked}
                                 value={student.npm}
                                 onChange={handleChange}
                                 id="checkbox-table-search-1"
@@ -387,7 +434,7 @@ function StudentTable({ schedule_data, type }) {
                       <td className="w-4 p-4">
                         <div className="flex items-center">
                           <input
-                            defaultChecked={student.is_checked}
+                            checked={student.is_checked}
                             value={student.npm}
                             onChange={handleChange}
                             id="checkbox-table-search-1"
@@ -425,7 +472,7 @@ function StudentTable({ schedule_data, type }) {
                       <td className="w-4 p-4">
                         <div className="flex items-center">
                           <input
-                            defaultChecked={student.is_checked}
+                            checked={student.is_checked}
                             value={student.npm}
                             onChange={handleChange}
                             id="checkbox-table-search-1"
@@ -458,7 +505,7 @@ function StudentTable({ schedule_data, type }) {
                       <td className="w-4 p-4">
                         <div className="flex items-center">
                           <input
-                            defaultChecked={student.is_checked}
+                            checked={student.is_checked}
                             value={student.npm}
                             onChange={handleChange}
                             id="checkbox-table-search-1"
@@ -526,7 +573,7 @@ function StudentTable({ schedule_data, type }) {
                   <b>{data.filter((d) => d.is_checked === true).length} Student</b>
                 </h3>
                 <button type="button" className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2" onClick={handleDeleteStudent}>
-                  {loadingDelete ? <LoadingAnimation /> : "Delete"}
+                  {loadingDelete || loadingDeleteAll ? <LoadingAnimation /> : "Delete"}
                 </button>
                 <button
                   type="button"
@@ -540,6 +587,7 @@ function StudentTable({ schedule_data, type }) {
           </div>
         </div>
       )}
+
       {ShowModalInsert && (
         <div id="modal-delete" tabIndex="-1" className="flex items-center overflow-y-auto overflow-x-hidden fixed right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
           <div className="relative mx-auto p-4 w-full max-w-md h-full md:h-auto">
