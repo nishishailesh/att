@@ -13,25 +13,28 @@ function FormCourse() {
   const INITIAL_STATE = {
     course_id: "",
     course_name: "",
-    sks: "",
+    sks: "1",
   };
 
   const [course, setCourse] = useState(INITIAL_STATE);
 
-  const [insertCourse, { loading: loadingInsert }] = useMutation(INSERT_COURSE, {
-    onCompleted: () => {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Course Added Successfully",
-        showConfirmButton: false,
-        timer: 1200,
-      });
+  const [insertCourse, { loading: loadingInsert }] = useMutation(
+    INSERT_COURSE,
+    {
+      onCompleted: () => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Course Added Successfully",
+          showConfirmButton: false,
+          timer: 1200,
+        });
 
-      setCourse(INITIAL_STATE);
-      dispatch(MODAL_ADD(false));
-    },
-  });
+        setCourse(INITIAL_STATE);
+        dispatch(MODAL_ADD(false));
+      },
+    }
+  );
   const handleInput = (e) => {
     e.preventDefault();
     insertCourse({
@@ -107,7 +110,10 @@ function FormCourse() {
         </label>
       </div>
       <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-        <button type="submit" className="text-white bg-gradient-to-r from-primary-blue via-blue-800 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2">
+        <button
+          type="submit"
+          className="text-white bg-gradient-to-r from-primary-blue via-blue-800 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"
+        >
           {loadingInsert ? <LoadingAnimation /> : "Submit"}
         </button>
       </div>

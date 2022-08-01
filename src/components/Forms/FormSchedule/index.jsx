@@ -12,9 +12,16 @@ import { GET_LECTURERS } from "../../../api/Model/Subscription/GetLecturers";
 
 function FormSchedule() {
   const id_prodi = useSelector((state) => state.prodi.id);
-  const { data: dataClasses, loading: loadingClasses } = useSubscription(GET_CLASS_NAMES, { variables: { prodi: id_prodi } });
-  const { data: dataCourses, loading: loadingCourses } = useSubscription(GET_COURSES, { variables: { prodi: id_prodi } });
-  const { data: dataLecturers, loading: loadingLecturers } = useSubscription(GET_LECTURERS);
+  const { data: dataClasses, loading: loadingClasses } = useSubscription(
+    GET_CLASS_NAMES,
+    { variables: { prodi: id_prodi } }
+  );
+  const { data: dataCourses, loading: loadingCourses } = useSubscription(
+    GET_COURSES,
+    { variables: { prodi: id_prodi } }
+  );
+  const { data: dataLecturers, loading: loadingLecturers } =
+    useSubscription(GET_LECTURERS);
   const dispatch = useDispatch();
 
   const INITIAL_STATE = {
@@ -23,31 +30,34 @@ function FormSchedule() {
     nidn: "",
     time: "",
     day: "",
-    room: "",
+    room: "Clinics",
   };
 
   const INITIAL_TIME = {
-    start: "",
-    end: "",
+    start: "09:00",
+    end: "11:59",
   };
 
   const [schedule, setSchedule] = useState(INITIAL_STATE);
   const [time, setTime] = useState(INITIAL_TIME);
 
-  const [insertSchedule, { loading: loadingInsert }] = useMutation(INSERT_SCHEDULE, {
-    onCompleted: () => {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Schedule successfully added",
-        showConfirmButton: false,
-        timer: 1200,
-      });
+  const [insertSchedule, { loading: loadingInsert }] = useMutation(
+    INSERT_SCHEDULE,
+    {
+      onCompleted: () => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Schedule successfully added",
+          showConfirmButton: false,
+          timer: 1200,
+        });
 
-      dispatch(MODAL_ADD(false));
-      setSchedule(INITIAL_STATE);
-    },
-  });
+        dispatch(MODAL_ADD(false));
+        setSchedule(INITIAL_STATE);
+      },
+    }
+  );
 
   const handleInput = (e) => {
     e.preventDefault();
@@ -109,7 +119,7 @@ function FormSchedule() {
           className="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
           <option value={""} disabled>
-          Choose Course
+            Choose Course
           </option>
           {dataCourses?.courses.map((d) => (
             <option key={d.course_id} value={d.course_id}>
@@ -127,7 +137,7 @@ function FormSchedule() {
           className="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
           <option value={""} disabled>
-          Choose Class
+            Choose Class
           </option>
           {dataClasses?.class.map((d) => (
             <option key={d.id} value={d.id}>
@@ -145,7 +155,7 @@ function FormSchedule() {
           className="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
           <option value={""} disabled>
-          Choose a Lecturer
+            Choose a Lecturer
           </option>
           {dataLecturers?.lecturers.map((d) => (
             <option key={d.nidn} value={d.nidn}>
@@ -178,7 +188,11 @@ function FormSchedule() {
             onChange={(e) => setTime({ ...time, end: e.target.value })}
             className="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
-          <button type="button" onClick={handleTime} className="text-white bg-gradient-to-r from-primary-blue via-blue-800 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2">
+          <button
+            type="button"
+            onClick={handleTime}
+            className="text-white bg-gradient-to-r from-primary-blue via-blue-800 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"
+          >
             SET
           </button>
           <input
@@ -202,14 +216,15 @@ function FormSchedule() {
           className="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
           <option disabled value="">
-            -- Choose Day --
+            -- Choose Month --
           </option>
-          <option value="Monday">Monday</option>
-          <option value="Tuesday">Tuesday</option>
-          <option value="Wednesday">Wednesday</option>
-          <option value="Thursday">Thursday</option>
-          <option value="Friday">Friday</option>
-          <option value="Saturday">Saturday</option>
+
+          <option value="Jan-Feb">Jan-Feb</option>
+          <option value="March-Apr">March-Apr</option>
+          <option value="May-Jun">May-Jun</option>
+          <option value="Jul-Aug">Jul-Aug</option>
+          <option value="Sept-Oct">Sept-Oct</option>
+          <option value="Nov-Dec">Nov-Dec</option>
         </select>
       </div>
 
@@ -225,19 +240,22 @@ function FormSchedule() {
           <option disabled value="">
             -- Choose Room --
           </option>
-          <option value="F.T - 1.1">F.T - 1.1</option>
-          <option value="F.T - 1.2">F.T - 1.2</option>
-          <option value="F.T - 1.3">F.T - 1.3</option>
-          <option value="F.T - 1.4">F.T - 1.4</option>
-          <option value="F.T - 2.1">F.T - 2.1</option>
-          <option value="F.T - 2.2">F.T - 2.2</option>
-          <option value="F.T - 2.34">F.T - 2.34</option>
-          <option value="F.T - 3.1">F.T - 3.1</option>
+          <option value="Clinics">Clinics</option>
+          <option value="Lecturhall 1">Lecturhall 1</option>
+          <option value="Lecturhall 2">Lecturhall 2</option>
+          <option value="Lecturhall 3">Lecturhall 3</option>
+          <option value="Lecturhall 4">Lecturhall 4</option>
+          <option value="Lecturhall 5">Lecturhall 5</option>
+          <option value="Lecturhall 6">Lecturhall 6</option>
+          <option value="Lecturhall 7">Lecturhall 7</option>
         </select>
       </div>
 
       <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-        <button type="submit" className="text-white bg-gradient-to-r from-primary-blue via-blue-800 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2">
+        <button
+          type="submit"
+          className="text-white bg-gradient-to-r from-primary-blue via-blue-800 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"
+        >
           {loadingInsert ? <LoadingAnimation /> : "Add"}
         </button>
       </div>

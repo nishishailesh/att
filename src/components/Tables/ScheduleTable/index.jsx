@@ -40,7 +40,7 @@ function ScheduleTable() {
                 Lecturer
               </th>
               <th scope="col" className="px-6 py-3">
-                Day
+                Month
               </th>
               <th scope="col" className="px-6 py-3">
                 O'clock
