@@ -220,12 +220,12 @@ function PresentTable({ schedule_data, npm }) {
               <p className=" text-center text-lg ">%</p>
             </div>
             <p className=" text-center lg:text-2xl text-lg">
-              From {schedule_data.meet_number} Meeting
+              From {schedule_data.meet_number} Session
             </p>
           </div>
         ) : (
           <div className="justify-center flex flex-col gap-y-5 text-primary-grey dark:text-white">
-            <p className=" text-center lg:text-2xl text-lg">No meeting yet</p>
+            <p className=" text-center lg:text-2xl text-lg">No Session yet</p>
           </div>
         )}
       </div>

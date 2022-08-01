@@ -48,7 +48,7 @@ function HeaderAttendance({ schedule_data, meet }) {
 
           <tr>
             <td className="w-1/6 py-2">
-              <p className="text-gray-700 dark:text-gray-400">Meeting</p>
+              <p className="text-gray-700 dark:text-gray-400">Session</p>
             </td>
             <td>:</td>
             <td>

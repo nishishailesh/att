@@ -10,7 +10,9 @@ import ModalDetailClass from "../../Modal/ModalDetailClass";
 
 function ScheduleTable() {
   const id_prodi = useSelector((state) => state.prodi.id);
-  const { data, loading } = useSubscription(GET_SCHEDULE, { variables: { prodi: id_prodi } });
+  const { data, loading } = useSubscription(GET_SCHEDULE, {
+    variables: { prodi: id_prodi },
+  });
   let no = 1;
 
   return (
@@ -32,7 +34,7 @@ function ScheduleTable() {
                 Class
               </th>
               <th scope="col" className="px-6 py-3">
-              study program
+                study program
               </th>
               <th scope="col" className="px-6 py-3">
                 Lecturer
@@ -41,13 +43,13 @@ function ScheduleTable() {
                 Day
               </th>
               <th scope="col" className="px-6 py-3">
-              O'clock
+                O'clock
               </th>
               <th scope="col" className="px-6 py-3">
                 Room
               </th>
               <th scope="col" className="px-6 py-3">
-                Meeting
+                Session
               </th>
               <th scope="col" className="px-6 py-3 text-center">
                 Action
@@ -63,12 +65,17 @@ function ScheduleTable() {
               </tr>
             ) : data?.schedules.length !== 0 ? (
               data?.schedules.map((d) => (
-                <tr key={d.id} className="dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-primary-white2 dark:hover:bg-gray-700">
+                <tr
+                  key={d.id}
+                  className="dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-primary-white2 dark:hover:bg-gray-700"
+                >
                   <td className="px-6 py-4">{no++}</td>
                   <td className="px-6 py-4">{d.course.course_id}</td>
                   <td className="px-6 py-4">{d.course.course_name}</td>
                   <td className="px-6 py-4">{d.class.class_name}</td>
-                  <td className="px-6 py-4">{d.class.study_program.study_program_name}</td>
+                  <td className="px-6 py-4">
+                    {d.class.study_program.study_program_name}
+                  </td>
                   <td className="px-6 py-4">{d.lecturer.fullname}</td>
                   <td className="px-6 py-4">{d.day}</td>
                   <td className="px-6 py-4">{d.time}</td>

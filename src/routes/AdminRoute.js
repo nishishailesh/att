@@ -11,20 +11,24 @@ function AdminRoute() {
   useEffect(() => {
     if (AUTH.getRole() === "1") {
       dispatch(ID_PRODI("6021"));
-      dispatch(NAME_PRODI("PSM"));
+      dispatch(NAME_PRODI("Batch1"));
     } else if (AUTH.getRole() === "2") {
       dispatch(ID_PRODI("22201"));
-      dispatch(NAME_PRODI("Medicine"));
+      dispatch(NAME_PRODI("Batch2"));
     } else if (AUTH.getRole() === "3") {
-      dispatch(ID_PRODI("26201"));
-      dispatch(NAME_PRODI("Surgery"));
+      dispatch(ID_PRODI("6023"));
+      dispatch(NAME_PRODI("Batch3"));
+    } else if (AUTH.getRole() === "6") {
+      dispatch(ID_PRODI("6024"));
+      dispatch(NAME_PRODI("Batch4"));
     }
   }, [dispatch]);
 
   if (
     (AUTH.setAuth() && AUTH.getRole() === "1") ||
     AUTH.getRole() === "2" ||
-    AUTH.getRole() === "3"
+    AUTH.getRole() === "3" ||
+    AUTH.getRole() === "6"
   )
     return <Outlet />;
   return (

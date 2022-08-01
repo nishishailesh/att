@@ -70,11 +70,11 @@ function Absensi() {
                   </p>
                   {d.meet_number !== 60 ? (
                     <p className="mb-3 text-sm text-gray-700 dark:text-gray-400">
-                      No of Meetings : {d.meet_number}
+                      No of Sessions : {d.meet_number}
                     </p>
                   ) : (
                     <p className="mb-3 text-sm text-gray-700 dark:text-gray-400">
-                      MEETING ENDS
+                      Session ENDS
                     </p>
                   )}
                   <ModalAttendance data={d} role={"lecturer"} />

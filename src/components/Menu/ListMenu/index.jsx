@@ -5,7 +5,12 @@ import MenuLecturers from "../MenuLecturers";
 import MenuStaff from "../MenuStaff";
 
 function ListMenu() {
-  if (AUTH.getRole() === "1" || AUTH.getRole() === "2" || AUTH.getRole() === "3") {
+  if (
+    AUTH.getRole() === "1" ||
+    AUTH.getRole() === "2" ||
+    AUTH.getRole() === "3" ||
+    AUTH.getRole() === "6"
+  ) {
     return <MenuStaff />;
   } else if (AUTH.getRole() === "4") {
     return <MenuStudents />;

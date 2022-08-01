@@ -768,7 +768,7 @@ function ExportAttendance({ data }) {
 
     XLSX.writeFile(
       wb,
-      "Absensi " +
+      "Attendance " +
         data.class.class_name +
         " " +
         data.course.course_name +

@@ -5,7 +5,7 @@ function HeaderTable() {
     <>
       <tr>
         <th colSpan={14} scope="col" className="px-6 py-3 text-center">
-          Meeting
+          Session
         </th>
       </tr>
       <tr>
