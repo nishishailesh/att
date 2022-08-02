@@ -220,7 +220,8 @@ function PresentTable({ schedule_data, npm }) {
               <p className=" text-center text-lg ">%</p>
             </div>
             <p className=" text-center lg:text-2xl text-lg">
-              From {schedule_data.meet_number} Session
+              From {schedule_data.meet_number} Session total {persentase} times
+              present
             </p>
           </div>
         ) : (
