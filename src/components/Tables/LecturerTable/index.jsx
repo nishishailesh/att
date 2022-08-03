@@ -193,7 +193,7 @@ function LecturerTable() {
                     <td className="px-6 py-4">{lecturer.address}</td>
                     <td className="flex flex-row justify-center gap-x-1 pt-2">
                       <UpdateLecturerModal data={lecturer} />
-                      <ModalDelete data={lecturer} />
+                      <ModalDelete data={lecturer} type={"lecturer"} />
                     </td>
                   </tr>
                 ))
