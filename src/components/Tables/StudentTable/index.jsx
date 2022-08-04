@@ -502,7 +502,7 @@ function StudentTable({ schedule_data, type }) {
                           <td className="px-6 py-4">{student.is_active === true ? "Active" : "Inactive"}</td>
                           <td className="flex flex-row justify-center gap-x-1 pt-2">
                             <UpdateStudentModal data={student} />
-                            <ModalDelete data={student} />
+                            <ModalDelete data={student} type={"student"} />
                           </td>
                         </>
                       )}
@@ -535,7 +535,7 @@ function StudentTable({ schedule_data, type }) {
                           <td className="px-6 py-4">{student.is_active === true ? "Active" : "Inactive"}</td>
                           <td className="flex flex-row justify-center gap-x-1 pt-2">
                             <UpdateStudentModal data={student} />
-                            <ModalDelete data={student} />
+                            <ModalDelete data={student} type={"student"} />
                           </td>
                         </>
                       )}
