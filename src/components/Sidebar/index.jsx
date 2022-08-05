@@ -8,15 +8,33 @@ function Sidebar() {
     <>
       <input type="checkbox" id="check" />
       <label htmlFor="check">
-        <FaBars id="btn" className="dark:text-white text-primary-blue" size={20} />
-        <FaRegWindowClose id="cancel" className="w-8 dark:text-white text-primary-blue" size={25} />
+        <FaBars
+          id="btn"
+          className="dark:text-white text-primary-blue"
+          size={20}
+        />
+        <FaRegWindowClose
+          id="cancel"
+          className="w-8 dark:text-white text-primary-blue"
+          size={25}
+        />
       </label>
 
       <div className="sidebar bg-primary-white dark:bg-primary-grey py-14">
         <div className="w-full flex flex-row items-center justify-center">
-          <a href="https://ft.unsur.ac.id" target="__blank" className="flex py-5 border-b-2">
-            <img src={require("../../assets/img/ftLogo.png")} className="lg:h-12 h-6 mr-3 sm:h-7" alt="FT Logo" />
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">GMCS</span>
+          <a
+            href="https://gmcsurat.edu.in/doku.php"
+            target="__blank"
+            className="flex py-5 border-b-2"
+          >
+            <img
+              src={require("../../assets/img/ftLogo.png")}
+              className="lg:h-12 h-6 mr-3 sm:h-7"
+              alt="FT Logo"
+            />
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+              GMCS
+            </span>
           </a>
         </div>
 
