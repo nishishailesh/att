@@ -52,7 +52,7 @@ function Absensi() {
                     {d.room} , {d.day} / {d.time}
                   </p>
                   {d.meet_number !== 60 ? <p className="mb-3 text-sm text-gray-700 dark:text-gray-400">No of Sessions : {d.meet_number}</p> : <p className="mb-3 text-sm text-gray-700 dark:text-gray-400">Session ENDS</p>}
-                  <div className="flex flex-row justify-between">
+                  <div className="flex flex-col lg:flex-row justify-between">
                     <ModalAttendance data={d} role={"lecturer"} />
                     <ModalHistory schedule={d} />
                   </div>

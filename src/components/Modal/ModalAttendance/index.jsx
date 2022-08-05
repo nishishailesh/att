@@ -82,6 +82,7 @@ function ModalAttendance({ data, role }) {
                   meet_number: data.meet_number + 1,
                 });
                 setShowModal(true);
+                dispatch(SET_DATE(""));
               }}
               className="inline-flex items-center py-3 px-3 text-sm font-medium text-center text-white bg-primary-blue rounded-lg hover:bg-secondary-blue focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-primary-blue dark:hover:bg-secondary-blue dark:focus:ring-blue-800"
             >
